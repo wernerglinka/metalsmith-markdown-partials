@@ -1,5 +1,4 @@
 /* eslint-disable */
-var path = require('path');
 var fs = require('fs');
 
 module.exports = plugin;
@@ -10,14 +9,15 @@ module.exports = plugin;
 
 function plugin(options){
   options = options || {};
-  var keys = options.keys || [];
 
   return function(files, metalsmith, done){
     setImmediate(done);
+
     Object.keys(files).forEach(function(file){
 
       // exit if this file is not a markdown file
-      if (!isMarkdown(file)) return;
+      var fileExtension = file.split('.').pop();
+      if ( fileExtension !== 'md') return;
 
       // get the file data and convert to string
       var fileData = files[file];
@@ -32,18 +32,6 @@ function plugin(options){
     });
   };
 }
-
-
-/**
- * isMarkdown
- * function to check if a file is a markdown file. Rather if the file has the .md extension
- * @param  {[object]}  file the file being processed as an object
- * @return {Boolean}   true if the file has the .md extension
- */
-function isMarkdown(file){
-  return /\.md/.test(path.extname(file));
-}
-
 
 /**
  * getIncludes
@@ -106,8 +94,9 @@ function resolveIncludes(fileData, markers, options) {
     filePath = filePath.match(/"([^"]+)"/)[1];
 
     // get the file content synchronously
+    var libPath = options.libraryPath || './dev/content/library/'
     try {
-        var data = fs.readFileSync(options.libraryPath + filePath, 'utf8');
+        var data = fs.readFileSync(libPath + filePath, 'utf8');
     } catch(e) {
         console.log('Error:', e.stack);
     }
