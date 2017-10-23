@@ -1,0 +1,28 @@
+{
+  "name": "metalsmith-markdown-partials",
+  "version": "1.0.0",
+  "description": "A Metalsmith plugin that allows the use of partial markdowm files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wernerglinka/metalsmith-markdown-partials.git"
+  },
+  "keywords": [
+    "Metalsmith",
+    "Markdown",
+    "Partials"
+  ],
+  "author": [
+    { "name": "Werner Glinka",
+      "email": "werner@glinka.co"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wernerglinka/metalsmith-markdown-partials/issues"
+  },
+  "homepage": "https://github.com/wernerglinka/metalsmith-markdown-partials#readme"
+}
