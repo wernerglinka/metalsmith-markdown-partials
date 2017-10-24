@@ -31,6 +31,11 @@ var ignore = require('metalsmith-ignore');
 ...
 ````
 
+## Install
+````
+$ npm install --save metalsmith-markdown-partials
+````
+
 ## Usage
 ````
 var mdPartials = require('metalsmith-markdown-partials');
