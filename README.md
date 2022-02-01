@@ -3,7 +3,7 @@
 This Metalsmith plugin enables the use of Markdown partials, e.g. Markdown fragments can be inserted into the contents section of a page markdown file via an include marker.
 
 ````
-{{md "<file name>.md" }}
+{#md "<file name>.md" #}
 ````
 
 This allows for modular markdown and promotes reuse of markdown partials.
@@ -14,59 +14,81 @@ A markdown file that will be transformed into an html file via a template
 ## Markdown Partials
 A markdown file to be inserted into a Page Markdown file
 
-Markdown partials are located in a separate directory, for example /library/. This directory should be located in _/dev/content/_ and ignored by the Metalsmith process. This can be done using [metalsmith-ignore](https://github.com/segmentio/metalsmith-ignore).
+Markdown partials are located in a separate directory, for example /md-library/. This directory should be located outside _/src/content/_ .
 
 Partial markdown files have the extention **.md**. A markdown partial file does NOT have frontmatter metadata, only the markdown to be inserted into a page markdown file.
 
-The markdown partials directory's default location is './dev/content/library/'. The partials directory can be set via the libraryPath option.
+The markdown partials directory's default location is './src/md-library/'. The partials directory can be set via the libraryPath option.
 
-### Example to ignore partial markdown files:
-````
-var ignore = require('metalsmith-ignore');
-...
-// ignore partial markdown files in library
-.use(ignore([
-  'library/*'
-  ]))
-...
-````
 
-## Install
-````
+
+## Installation
+````js
 $ npm install --save metalsmith-markdown-partials
 ````
 
 ## Usage
-````
+````js
 var mdPartials = require('metalsmith-markdown-partials');
 
 ...
-.use(mdPartials({"libraryPath": './dev/content/library/'}))
+.use(mdPartials({
+    libraryPath: './src/md-partials/',
+    fileSuffix: '.md.njk',
+  }))
 ...
 
 ````
 
+## Options
+
+**libraryPath**
+
+The default libraryPath is './src/md-partials/'. This default assumes that all pages are located in './src/content/*' so the markdown partials are located outside the metalsmith source directory.
+
+```js
+const mdPartials = require('metalsmith-markdown-partials');
+
+metalsmith(__dirname)
+  .use(mdPartials({
+    libraryPath: './src/md-partials/'
+  })
+```
+
+**fileSuffix**
+
+The default fileSuffix is 'md', but depending on which templating language is used, the suffix will have two parts. For example for Nunjucks it will be 'md.njk'.
+```js
+const mdPartials = require('metalsmith-markdown-partials')
+
+.use(mdPartials({
+    fileSuffix: '.md.njk',
+  }))
+```
+
+## How it works
+
 ### index.md
 
-````
+````markdown
 # This is an Example Page
 
 Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
 
-{{md "example_partial.md" }}
+{#md "example_partial.md" #}
 
 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 ````
 
 ### example_partial.md
 
-````
+````markdown
 ## Inserted Content
 Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.
 ````
 
 ### index.html
-````
+````html
 <h1>This is an Example Page</h1>
 
 <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
@@ -77,7 +99,13 @@ Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae
 <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
 ````
 
+## Authors
++ [werner@glinka.co](https://github.com/wernerglinka)
 
+
+## License
+
+Code released under [the ISC license](https://github.com/wernerglinka/metalsmith-markdown-partials/blob/main/LICENSE).
 
 
 

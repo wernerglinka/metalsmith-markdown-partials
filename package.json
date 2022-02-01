@@ -2,21 +2,21 @@
   "name": "metalsmith-markdown-partials",
   "version": "1.0.0",
   "description": "A Metalsmith plugin that allows the use of partial markdowm files",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "keywords": [
+    "metalsmith-plugin",
+    "metalsmith",
+    "markdown",
+    "markdown-partials",
+    "static-site"
+  ],
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wernerglinka/metalsmith-markdown-partials.git"
   },
-  "keywords": [
-    "Metalsmith",
-    "Markdown",
-    "Partials"
-  ],
   "author": [
-    { "name": "Werner Glinka",
+    {
+      "name": "Werner Glinka",
       "email": "werner@glinka.co"
     }
   ],
@@ -24,5 +24,26 @@
   "bugs": {
     "url": "https://github.com/wernerglinka/metalsmith-markdown-partials/issues"
   },
-  "homepage": "https://github.com/wernerglinka/metalsmith-markdown-partials#readme"
+  "homepage": "https://github.com/wernerglinka/metalsmith-markdown-partials#readme",
+  "dependencies": {
+    "debug": "^4.3.3"
+  },
+  "devDependencies": {
+    "assert-dir-equal": "^1.1.0",
+    "auto-changelog": "^2.3.0",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "metalsmith": "^2.4.1",
+    "mocha": "^7.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1"
+  },
+  "peerDependencies": {
+    "metalsmith": "^2.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
 }
