@@ -1,9 +1,5 @@
 # metalsmith-markdown-partials
 
-[![metalsmith: core plugin][metalsmith-badge]][metalsmith-url]
-[![npm: version][npm-badge]][npm-url]
-[![license: ISC][license-badge]][license-url]
-
 This Metalsmith plugin enables the use of Markdown partials, e.g. Markdown fragments can be inserted into the contents section of a page markdown file via an include marker.
 
 ```

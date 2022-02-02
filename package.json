@@ -27,7 +27,6 @@
     "debug": "^4.3.3"
   },
   "devDependencies": {
-    "assert-dir-equal": "^1.1.0",
     "auto-changelog": "^2.3.0",
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
@@ -35,7 +34,6 @@
     "eslint-config-prettier": "^8.3.0",
     "metalsmith": "^2.4.1",
     "mocha": "^9.2.0",
-    "nyc": "^15.1.0",
     "prettier": "^2.5.1"
   },
   "peerDependencies": {
@@ -43,8 +41,6 @@
   },
   "scripts": {
     "changelog": "auto-changelog -u date --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)'",
-    "coverage": "nyc report --reporter=text-lcov > ./coverage.info",
-    "coveralls": "npm run coverage && cat ./coverage.info | coveralls",
     "format": "prettier --write \"**/*.{yml,md,js,json}\"",
     "lint": "eslint --cache --fix-dry-run .",
     "release": "release-it .",
