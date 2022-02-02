@@ -29,12 +29,12 @@
   "devDependencies": {
     "assert-dir-equal": "^1.1.0",
     "auto-changelog": "^2.3.0",
+    "chai": "^4.3.6",
     "coveralls": "^3.1.1",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "metalsmith": "^2.4.1",
     "mocha": "^9.2.0",
-    "chai": "^4.0.2",
     "nyc": "^15.1.0",
     "prettier": "^2.5.1"
   },
@@ -48,7 +48,7 @@
     "format": "prettier --write \"**/*.{yml,md,js,json}\"",
     "lint": "eslint --cache --fix-dry-run .",
     "release": "release-it .",
-    "test": "nyc mocha"
+    "test": "mocha ./tests/index.js"
   },
   "engines": {
     "node": ">=8"
