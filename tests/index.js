@@ -21,7 +21,7 @@ describe('metalsmith-markdown-partials', () => {
 
     metalsmith(fixture())
       .use(mdPartials({
-          libraryPath: path.join(fixture(), `/md-partials/`),
+          libraryPath: path.join(fixture(), `/src/md-partials/`),
           fileSuffix: '.md',
         }))
       .build( err => {
