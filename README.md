@@ -12,15 +12,15 @@ This allows for modular markdown and promotes reuse of markdown partials.
 
 A markdown file that will be transformed into an html file via a template
 
-## Markdown Partials
+## Markdown Partial
 
 A markdown file to be inserted into a Page Markdown file
 
-Markdown partials are located in a separate directory, for example /md-library/. This directory should be located outside _/src/content/_ .
+Markdown partials are located in a separate directory, for example `/markdown-library/`. This directory should be located inside `/src/` .
 
-Partial markdown files have the extention **.md**. A markdown partial file does NOT have frontmatter metadata, only the markdown to be inserted into a page markdown file.
+Partial markdown files have the extention `.md`. A markdown partial file does NOT have frontmatter metadata, only the markdown to be inserted into a page markdown file.
 
-The markdown partials directory's default location is './src/md-library/'. The partials directory can be set via the libraryPath option.
+The markdown partials directory's default location is `./src/markdown-library/`. The partials directory can be set via the libraryPath option.
 
 ## Installation
 
@@ -35,7 +35,7 @@ var mdPartials = require('metalsmith-markdown-partials');
 
 ...
 .use(mdPartials({
-    libraryPath: './src/md-partials/',
+    libraryPath: './markdown-partials/',
     fileSuffix: '.md.njk',
   }))
 ...
@@ -46,20 +46,20 @@ var mdPartials = require('metalsmith-markdown-partials');
 
 **libraryPath**
 
-The default libraryPath is './src/md-partials/'. This default assumes that all pages are located in './src/content/\*' so the markdown partials are located outside the metalsmith source directory.
+The default libraryPath is `./markdown-partials/`. This default assumes that all pages are located in `./src/` so the markdown partials are located inside the metalsmith source directory.
 
 ```js
 const mdPartials = require('metalsmith-markdown-partials');
 
 metalsmith(__dirname)
   .use(mdPartials({
-    libraryPath: './src/md-partials/'
+    libraryPath: './markdown-partials/'
   })
 ```
 
 **fileSuffix**
 
-The default fileSuffix is 'md', but depending on which templating language is used, the suffix will have two parts. For example for Nunjucks it will be 'md.njk'.
+The default fileSuffix is `.md`, but depending on which templating language is used, the suffix will have two parts. For example for Nunjucks it will be `md.njk`.
 
 ```js
 const mdPartials = require('metalsmith-markdown-partials').use(
