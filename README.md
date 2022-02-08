@@ -127,7 +127,7 @@ Code released under [the ISC license](https://github.com/wernerglinka/metalsmith
 
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-markdown-partials.svg
 [npm-url]: https://www.npmjs.com/package/metalsmith-markdown-partials
-[metalsmith-badge]: https://img.shields.io/badge/metalsmith-community_plugin-green.svg?longCache=true
+[metalsmith-badge]: https://img.shields.io/badge/metalsmith-plugin-green.svg?longCache=true
 [metalsmith-url]: https://metalsmith.io
 [license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-markdown-partials
 [license-url]: LICENSE
