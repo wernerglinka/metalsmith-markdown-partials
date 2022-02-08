@@ -2,6 +2,10 @@
 
 This Metalsmith plugin enables the use of Markdown partials, e.g. Markdown fragments can be inserted into the contents section of a page markdown file via an include marker.
 
+[![metalsmith: plugin][metalsmith-badge]][metalsmith-url]
+[![npm: version][npm-badge]][npm-url]
+[![license: MIT][license-badge]][license-url]
+
 ```
 {#md "<file name>.md" #}
 ```
@@ -112,10 +116,18 @@ Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae
 </p>
 ```
 
-## Authors
+## Credits
 
 - [werner@glinka.co](https://github.com/wernerglinka)
 
 ## License
 
 Code released under [the ISC license](https://github.com/wernerglinka/metalsmith-markdown-partials/blob/main/LICENSE).
+
+
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-markdown-partials.svg
+[npm-url]: https://www.npmjs.com/package/metalsmith-markdown-partials
+[metalsmith-badge]: https://img.shields.io/badge/metalsmith-community_plugin-green.svg?longCache=true
+[metalsmith-url]: https://metalsmith.io
+[license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-markdown-partials
+[license-url]: LICENSE
