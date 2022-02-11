@@ -1,30 +1,12 @@
 # metalsmith-markdown-partials
 
-This Metalsmith plugin enables the use of Markdown partials, e.g. Markdown fragments can be inserted into the contents section of a page markdown file via an include marker.
+A Metalsmith plugin that enables the use of Markdown partials.
 
 [![metalsmith: plugin][metalsmith-badge]][metalsmith-url]
 [![npm: version][npm-badge]][npm-url]
-[![license: MIT][license-badge]][license-url]
+[![license: ISC][license-badge]][license-url]
 
-```
-{#md "<file name>.md" #}
-```
-
-This allows for modular markdown and promotes reuse of markdown partials.
-
-## Page Markdown File
-
-A markdown file that will be transformed into an html file via a template
-
-## Markdown Partial
-
-A markdown file to be inserted into a Page Markdown file
-
-Markdown partials are located in a separate directory, for example `/markdown-library/`. This directory should be located inside `/src/` .
-
-Partial markdown files have the extention `.md`. A markdown partial file does NOT have frontmatter metadata, only the markdown to be inserted into a page markdown file.
-
-The markdown partials directory's default location is `./src/markdown-library/`. The partials directory can be set via the libraryPath option.
+Markdown fragments are be inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
 
 ## Installation
 
@@ -75,7 +57,27 @@ const mdPartials = require('metalsmith-markdown-partials').use(
 
 ## How it works
 
-### index.md
+### Replacement marker
+```
+{#md "<file name>.md" #}
+```
+
+### Page Markdown File
+A markdown file that will be transformed into an html file via a template
+
+### Markdown Partial
+
+A markdown file to be inserted into a Page Markdown file
+
+Markdown partials are located in a separate directory, for example `/markdown-library/`. This directory should be located inside `/src/` .
+
+Partial markdown files have the extention `.md`. A markdown partial file does NOT have frontmatter metadata, only the markdown to be inserted into a page markdown file.
+
+The markdown partials directory's default location is `./src/markdown-library/`. The partials directory can be set via the libraryPath option.
+
+## Example
+
+**index.md**
 
 ```markdown
 # This is an Example Page
@@ -87,7 +89,7 @@ Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 ```
 
-### example_partial.md
+**example_partial.md**
 
 ```markdown
 ## Inserted Content
@@ -95,7 +97,7 @@ Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac fa
 Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.
 ```
 
-### index.html
+**index.html**
 
 ```html
 <h1>This is an Example Page</h1>
@@ -115,8 +117,39 @@ Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae
   parturient montes, nascetur ridiculus mus.
 </p>
 ```
+## Debug
 
-## Credits
+To enable debug logs, set the `DEBUG` environment variable to `metalsmith-markdown-partials`:
+
+Linux/Mac:
+
+```
+DEBUG=metalsmith-markdown-partials
+```
+
+Windows:
+
+```
+set "DEBUG=metalsmith-markdown-partials"
+```
+### CLI usage
+
+To use this plugin with the Metalsmith CLI, add `metalsmith-markdown-partials` to the `plugins` key in your `metalsmith.json` file:
+
+```json
+{
+  "plugins": [
+    {
+      "metalsmith-markdown-partials": {
+        "libraryPath": "./markdown-partials/",
+        "fileSuffix": ".md.njk"
+      }
+    }
+  ]
+}
+```
+
+## Author
 
 - [werner@glinka.co](https://github.com/wernerglinka)
 
