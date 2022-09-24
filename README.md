@@ -6,7 +6,7 @@ A Metalsmith plugin that enables the use of Markdown partials.
 [![npm: version][npm-badge]][npm-url]
 [![license: ISC][license-badge]][license-url]
 
-Markdown fragments are be inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
+Markdown fragments are inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
 
 ## Installation
 
@@ -57,7 +57,7 @@ const mdPartials = require('metalsmith-markdown-partials').use(
 
 ## How it works
 
-### Replacement marker
+### Include marker
 ```
 {#md "<file name>.md" #}
 ```
