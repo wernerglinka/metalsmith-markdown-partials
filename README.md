@@ -60,11 +60,13 @@ const mdPartials = require('metalsmith-markdown-partials').use(
 ## How it works
 
 ### Include marker
+
 ```
 {#md "<file name>.md" #}
 ```
 
 ### Page Markdown File
+
 A markdown file that will be transformed into an html file via a template
 
 ### Markdown Partial
@@ -119,6 +121,7 @@ Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae
   parturient montes, nascetur ridiculus mus.
 </p>
 ```
+
 ## Debug
 
 To enable debug logs, set the `DEBUG` environment variable to `metalsmith-markdown-partials`:
@@ -134,6 +137,7 @@ Windows:
 ```
 set "DEBUG=metalsmith-markdown-partials"
 ```
+
 ### CLI usage
 
 To use this plugin with the Metalsmith CLI, add `metalsmith-markdown-partials` to the `plugins` key in your `metalsmith.json` file:
@@ -161,17 +165,14 @@ This project maintains high statement and line coverage for the source code. Cov
 
 Coverage report (from latest test run):
 
-File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
-----------|---------|----------|---------|---------|-------------------
-All files | 94.17 | 79.16 | 100 | 94.17 |
- index.js | 94.17 | 79.16 | 100 | 94.17 | 83-85,137-139,177-179,188-189
-
-
+| File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s             |
+| --------- | ------- | -------- | ------- | ------- | ----------------------------- |
+| All files | 94.17   | 79.16    | 100     | 94.17   |
+| index.js  | 94.17   | 79.16    | 100     | 94.17   | 83-85,137-139,177-179,188-189 |
 
 ## License
 
 Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-markdown-partials/blob/main/LICENSE).
-
 
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-markdown-partials.svg
 [npm-url]: https://www.npmjs.com/package/metalsmith-markdown-partials

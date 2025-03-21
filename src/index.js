@@ -1,6 +1,6 @@
 /**
  * A Metalsmith plugin to merge markdown partials into main markdown files.
- * 
+ *
  * @module metalsmith-markdown-partials
  */
 
@@ -40,27 +40,27 @@ function getMarkdownIncludes(files, options, debug) {
   const markdownIncludes = [];
 
   // Extract the library name from the path
-  const libraryPath = options.libraryPath.slice(0, -1).split("/");
+  const libraryPath = options.libraryPath.slice(0, -1).split('/');
   const libraryName = libraryPath[libraryPath.length - 1];
-  
+
   debug('Processing markdown files with libraryName: %s', libraryName);
 
   // Regex for matching include markers
   const markerRegex = /\{#md\s*".+?"\s*#\}/g;
-  const markerStart = "{#md";
-  const markerEnd = "#}";
+  const markerStart = '{#md';
+  const markerEnd = '#}';
 
   // Set to track already processed partials to prevent duplicates
   const processedPartials = new Set();
 
-  Object.keys(files).forEach(function(file) {
+  Object.keys(files).forEach(function (file) {
     /*
      * checks if string 'file' ends with options.fileSuffix
      * when metalsmith-in-place or metalsmith-layouts are used
      * the suffix depends on what templating language is used
      * for example with Nunjucks it would be .md.njk
      *
-     * Also check that file does NOT start with libraryName as 
+     * Also check that file does NOT start with libraryName as
      * the markdown partials library is also located in the content folder
      */
     if (file.endsWith(options.fileSuffix) && !file.startsWith(libraryName)) {
@@ -69,27 +69,27 @@ function getMarkdownIncludes(files, options, debug) {
       // Check if markers are present
       const matches = str.match(markerRegex);
       if (!matches) return;
-      
+
       debug('Found %d markdown partials in %s', matches.length, file);
-      
+
       // Process each marker in the file
       matches.forEach((marker) => {
         // Extract the filename from the marker
-        const markerFileName = marker.replaceAll(" ", "").replace(`${markerStart}"`, "").replace(`"${markerEnd}`, "");
+        const markerFileName = marker.replaceAll(' ', '').replace(`${markerStart}"`, '').replace(`"${markerEnd}`, '');
         const partialKey = `${libraryName}/${markerFileName}`;
-        
+
         // Check if partial file exists
         if (!files[partialKey]) {
           debug('Warning: Partial file not found: %s', partialKey);
           return;
         }
-        
+
         // Skip if we've already processed this exact marker+file combination
         const combinedKey = `${file}:${marker}`;
         if (processedPartials.has(combinedKey)) return;
-        
+
         processedPartials.add(combinedKey);
-        
+
         // Get the replacement content
         const replacementString = files[partialKey].contents.toString();
 
@@ -103,7 +103,7 @@ function getMarkdownIncludes(files, options, debug) {
   });
 
   // Remove markdown-partials from metalsmith build process
-  Object.keys(files).forEach(function(file) {
+  Object.keys(files).forEach(function (file) {
     if (file.startsWith(libraryName)) {
       delete files[file];
     }
@@ -123,15 +123,13 @@ function getMarkdownIncludes(files, options, debug) {
  */
 function resolveMarkdownIncludes(files, markdownIncludes, debug) {
   // replace all markers with their markdown replacements
-  markdownIncludes.forEach(function(markdownInclude) {
+  markdownIncludes.forEach(function (markdownInclude) {
     const fileData = files[markdownInclude.file];
 
     // replace the include marker with the actual include file content
     try {
       const contents = fileData.contents.toString();
-      fileData.contents = Buffer.from(
-        contents.replace(markdownInclude.marker, markdownInclude.markerReplacement)
-      );
+      fileData.contents = Buffer.from(contents.replace(markdownInclude.marker, markdownInclude.markerReplacement));
       debug('Replaced marker in %s', markdownInclude.file);
     } catch (e) {
       debug('Error replacing marker in %s: %s', markdownInclude.file, e.message);
@@ -162,7 +160,7 @@ function initMarkdownPartials(options) {
     // Use metalsmith's debug method if available
     const debug = metalsmith.debug ? metalsmith.debug(debugNs) : () => {};
     debug('Running with options: %o', options);
-    
+
     try {
       // Get all markdown includes
       const markdownIncludes = getMarkdownIncludes(files, options, debug);
@@ -171,7 +169,7 @@ function initMarkdownPartials(options) {
       if (markdownIncludes.length) {
         resolveMarkdownIncludes(files, markdownIncludes, debug);
       }
-      
+
       setImmediate(done);
     } catch (err) {
       debug('Error processing markdown partials: %s', err.message);
