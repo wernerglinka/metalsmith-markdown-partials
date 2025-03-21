@@ -42,6 +42,7 @@ function getMarkdownIncludes(files, options, debug) {
   // Extract the library name from the path
   const libraryPath = options.libraryPath.slice(0, -1).split("/");
   const libraryName = libraryPath[libraryPath.length - 1];
+  
   debug('Processing markdown files with libraryName: %s', libraryName);
 
   // Regex for matching include markers
@@ -51,7 +52,8 @@ function getMarkdownIncludes(files, options, debug) {
 
   // Set to track already processed partials to prevent duplicates
   const processedPartials = new Set();
-  Object.keys(files).forEach(function (file) {
+
+  Object.keys(files).forEach(function(file) {
     /*
      * checks if string 'file' ends with options.fileSuffix
      * when metalsmith-in-place or metalsmith-layouts are used
@@ -67,27 +69,30 @@ function getMarkdownIncludes(files, options, debug) {
       // Check if markers are present
       const matches = str.match(markerRegex);
       if (!matches) return;
+      
       debug('Found %d markdown partials in %s', matches.length, file);
-
+      
       // Process each marker in the file
-      matches.forEach(marker => {
+      matches.forEach((marker) => {
         // Extract the filename from the marker
         const markerFileName = marker.replaceAll(" ", "").replace(`${markerStart}"`, "").replace(`"${markerEnd}`, "");
         const partialKey = `${libraryName}/${markerFileName}`;
-
+        
         // Check if partial file exists
         if (!files[partialKey]) {
           debug('Warning: Partial file not found: %s', partialKey);
           return;
         }
-
+        
         // Skip if we've already processed this exact marker+file combination
         const combinedKey = `${file}:${marker}`;
         if (processedPartials.has(combinedKey)) return;
+        
         processedPartials.add(combinedKey);
-
+        
         // Get the replacement content
         const replacementString = files[partialKey].contents.toString();
+
         markdownIncludes.push({
           marker,
           markerReplacement: replacementString,
@@ -98,11 +103,12 @@ function getMarkdownIncludes(files, options, debug) {
   });
 
   // Remove markdown-partials from metalsmith build process
-  Object.keys(files).forEach(function (file) {
+  Object.keys(files).forEach(function(file) {
     if (file.startsWith(libraryName)) {
       delete files[file];
     }
   });
+
   debug('Processed %d markdown includes', markdownIncludes.length);
   return markdownIncludes;
 }
@@ -117,13 +123,15 @@ function getMarkdownIncludes(files, options, debug) {
  */
 function resolveMarkdownIncludes(files, markdownIncludes, debug) {
   // replace all markers with their markdown replacements
-  markdownIncludes.forEach(function (markdownInclude) {
+  markdownIncludes.forEach(function(markdownInclude) {
     const fileData = files[markdownInclude.file];
 
     // replace the include marker with the actual include file content
     try {
       const contents = fileData.contents.toString();
-      fileData.contents = Buffer.from(contents.replace(markdownInclude.marker, markdownInclude.markerReplacement));
+      fileData.contents = Buffer.from(
+        contents.replace(markdownInclude.marker, markdownInclude.markerReplacement)
+      );
       debug('Replaced marker in %s', markdownInclude.file);
     } catch (e) {
       debug('Error replacing marker in %s: %s', markdownInclude.file, e.message);
@@ -149,10 +157,12 @@ function resolveMarkdownIncludes(files, markdownIncludes, debug) {
  */
 function initMarkdownPartials(options) {
   options = normalizeOptions(options);
+
   return function markdownPartials(files, metalsmith, done) {
     // Use metalsmith's debug method if available
     const debug = metalsmith.debug ? metalsmith.debug(debugNs) : () => {};
     debug('Running with options: %o', options);
+    
     try {
       // Get all markdown includes
       const markdownIncludes = getMarkdownIncludes(files, options, debug);
@@ -161,6 +171,7 @@ function initMarkdownPartials(options) {
       if (markdownIncludes.length) {
         resolveMarkdownIncludes(files, markdownIncludes, debug);
       }
+      
       setImmediate(done);
     } catch (err) {
       debug('Error processing markdown partials: %s', err.message);
@@ -169,10 +180,10 @@ function initMarkdownPartials(options) {
   };
 }
 
+// ESM export
+export default initMarkdownPartials;
+
 // CommonJS export compatibility
 if (typeof module !== 'undefined') {
   module.exports = initMarkdownPartials;
 }
-
-export { initMarkdownPartials as default };
-//# sourceMappingURL=index.js.map

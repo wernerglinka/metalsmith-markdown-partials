@@ -4,7 +4,9 @@ A Metalsmith plugin that enables the use of Markdown partials.
 
 [![metalsmith: plugin][metalsmith-badge]][metalsmith-url]
 [![npm: version][npm-badge]][npm-url]
-[![license: ISC][license-badge]][license-url]
+[![license: MIT][license-badge]][license-url]
+[![coverage][coverage-badge]][coverage-url]
+[![ESM/CommonJS][modules-badge]][npm-url]
 
 Markdown fragments are inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
 
@@ -153,9 +155,22 @@ To use this plugin with the Metalsmith CLI, add `metalsmith-markdown-partials` t
 
 - [werner@glinka.co](https://github.com/wernerglinka)
 
+## Test Coverage
+
+This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
+
+Coverage report (from latest test run):
+
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------|---------|----------|---------|---------|-------------------
+All files | 94.17 | 79.16 | 100 | 94.17 |
+ index.js | 94.17 | 79.16 | 100 | 94.17 | 83-85,137-139,177-179,188-189
+
+
+
 ## License
 
-Code released under [the ISC license](https://github.com/wernerglinka/metalsmith-markdown-partials/blob/main/LICENSE).
+Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-markdown-partials/blob/main/LICENSE).
 
 
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-markdown-partials.svg
@@ -164,3 +179,6 @@ Code released under [the ISC license](https://github.com/wernerglinka/metalsmith
 [metalsmith-url]: https://metalsmith.io
 [license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-markdown-partials
 [license-url]: LICENSE
+[coverage-badge]: https://img.shields.io/badge/coverage-94%25-brightgreen
+[coverage-url]: #test-coverage
+[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
