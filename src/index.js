@@ -53,7 +53,7 @@ function getMarkdownIncludes(files, options, debug) {
   // Set to track already processed partials to prevent duplicates
   const processedPartials = new Set();
 
-  Object.keys(files).forEach(function (file) {
+  Object.keys(files).forEach((file) => {
     /*
      * checks if string 'file' ends with options.fileSuffix
      * when metalsmith-in-place or metalsmith-layouts are used
@@ -68,7 +68,7 @@ function getMarkdownIncludes(files, options, debug) {
 
       // Check if markers are present
       const matches = str.match(markerRegex);
-      if (!matches) return;
+      if (!matches) {return;}
 
       debug('Found %d markdown partials in %s', matches.length, file);
 
@@ -86,7 +86,7 @@ function getMarkdownIncludes(files, options, debug) {
 
         // Skip if we've already processed this exact marker+file combination
         const combinedKey = `${file}:${marker}`;
-        if (processedPartials.has(combinedKey)) return;
+        if (processedPartials.has(combinedKey)) {return;}
 
         processedPartials.add(combinedKey);
 
@@ -103,7 +103,7 @@ function getMarkdownIncludes(files, options, debug) {
   });
 
   // Remove markdown-partials from metalsmith build process
-  Object.keys(files).forEach(function (file) {
+  Object.keys(files).forEach((file) => {
     if (file.startsWith(libraryName)) {
       delete files[file];
     }
@@ -123,7 +123,7 @@ function getMarkdownIncludes(files, options, debug) {
  */
 function resolveMarkdownIncludes(files, markdownIncludes, debug) {
   // replace all markers with their markdown replacements
-  markdownIncludes.forEach(function (markdownInclude) {
+  markdownIncludes.forEach((markdownInclude) => {
     const fileData = files[markdownInclude.file];
 
     // replace the include marker with the actual include file content
