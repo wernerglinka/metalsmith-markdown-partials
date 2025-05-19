@@ -7,7 +7,7 @@ A Metalsmith plugin that enables the use of Markdown partials.
 [![license: MIT][license-badge]][license-url]
 [![coverage][coverage-badge]][coverage-url]
 [![ESM/CommonJS][modules-badge]][npm-url]
-[![Known Vulnerabilities](https://snyk.io/test/github/wernerglinka/metalsmith-markdown-partials/badge.svg)](https://snyk.io/test/github/wernerglinka/metalsmith-markdown-partials/badge)
+[![Known Vulnerabilities](https://snyk.io/test/npm/metalsmith-markdown-partials/badge.svg)](https://snyk.io/test/npm/metalsmith-markdown-partials)
 
 Markdown fragments are inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
 
