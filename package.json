@@ -22,8 +22,9 @@
     "url": "git+https://github.com/wernerglinka/metalsmith-markdown-partials.git"
   },
   "files": [
+    "src",
     "lib",
-    "LICENSE.md",
+    "LICENSE",
     "README.md"
   ],
   "author": {
@@ -44,9 +45,10 @@
     "lint": "eslint --fix .",
     "lint:check": "eslint --fix-dry-run .",
     "prepublishOnly": "npm run build",
-    "prerelease": "npm run lint && npm test",
-    "release": "npm run build && GITHUB_TOKEN=$(grep GITHUB_TOKEN .env | cut -d '=' -f2) ./node_modules/.bin/release-it . ",
-    "release:check": "npm run lint:check && npm run build && GITHUB_TOKEN=$(grep GITHUB_TOKEN .env | cut -d '=' -f2) ./node_modules/.bin/release-it . --dry-run",
+    "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major",
+    "release:check": "npm run lint:check && npm run build && release-it --dry-run",
     "test": "c8 --include=src/**/*.js mocha 'test/index.js' 'test/cjs.test.cjs' -t 15000",
     "test:esm": "c8 --include=src/**/*.js mocha test/index.js -t 15000",
     "test:cjs": "c8 --include=src/**/*.js mocha test/cjs.test.cjs -t 15000",
@@ -56,13 +58,13 @@
   "devDependencies": {
     "auto-changelog": "^2.5.0",
     "c8": "^10.1.3",
-    "eslint": "^9.29.0",
-    "eslint-config-prettier": "^10.1.5",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
     "metalsmith": "^2.6.3",
     "microbundle": "^0.15.1",
-    "mocha": "^11.7.0",
-    "prettier": "^3.5.3",
-    "release-it": "19.0.3"
+    "mocha": "^11.7.1",
+    "prettier": "^3.6.2",
+    "release-it": "19.0.4"
   },
   "peerDependencies": {
     "metalsmith": "^2.5.1"
