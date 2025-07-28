@@ -180,8 +180,3 @@ function initMarkdownPartials(options) {
 
 // ESM export
 export default initMarkdownPartials;
-
-// CommonJS export compatibility
-if (typeof module !== 'undefined') {
-  module.exports = initMarkdownPartials;
-}
