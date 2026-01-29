@@ -68,7 +68,9 @@ function getMarkdownIncludes(files, options, debug) {
 
       // Check if markers are present
       const matches = str.match(markerRegex);
-      if (!matches) {return;}
+      if (!matches) {
+        return;
+      }
 
       debug('Found %d markdown partials in %s', matches.length, file);
 
@@ -86,7 +88,9 @@ function getMarkdownIncludes(files, options, debug) {
 
         // Skip if we've already processed this exact marker+file combination
         const combinedKey = `${file}:${marker}`;
-        if (processedPartials.has(combinedKey)) {return;}
+        if (processedPartials.has(combinedKey)) {
+          return;
+        }
 
         processedPartials.add(combinedKey);
 

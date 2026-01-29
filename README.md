@@ -12,6 +12,7 @@ A Metalsmith plugin that enables the use of Markdown partials.
 Markdown fragments are inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
 
 ## Features
+
 - This plugin supports both ESM and CommonJS environments with no configuration needed:
   - ESM: `import mdPartials from 'metalsmith-markdown-partials'`
   - CommonJS: `const mdPartials = require('metalsmith-markdown-partials')`
