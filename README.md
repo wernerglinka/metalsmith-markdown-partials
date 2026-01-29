@@ -177,6 +177,6 @@ Code released under [the MIT license](https://github.com/wernerglinka/metalsmith
 [metalsmith-url]: https://metalsmith.io
 [license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-markdown-partials
 [license-url]: LICENSE
-[coverage-badge]: https://img.shields.io/badge/test%20coverage-95%25-brightgreen
+[coverage-badge]: https://img.shields.io/badge/test%20coverage-94%25-brightgreen
 [coverage-url]: #test-coverage
 [modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
