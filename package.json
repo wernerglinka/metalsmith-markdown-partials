@@ -45,15 +45,14 @@
     "lint": "eslint --fix .",
     "lint:check": "eslint --fix-dry-run .",
     "prepublishOnly": "npm run build",
-    "release:patch": "GH_TOKEN=$(gh auth token) release-it patch",
-    "release:minor": "GH_TOKEN=$(gh auth token) release-it minor",
-    "release:major": "GH_TOKEN=$(gh auth token) release-it major",
+    "release:patch": "./scripts/release.sh patch --ci",
+    "release:minor": "./scripts/release.sh minor --ci",
+    "release:major": "./scripts/release.sh major --ci",
     "release:check": "npm run lint:check && npm run build && release-it --dry-run",
     "test": "c8 --include=src/**/*.js mocha 'test/index.js' 'test/cjs.test.cjs' -t 15000",
     "test:esm": "c8 --include=src/**/*.js mocha test/index.js -t 15000",
     "test:cjs": "c8 --include=src/**/*.js mocha test/cjs.test.cjs -t 15000",
-    "test:e2e": "serve -l 3000 test/fixtures",
-    "depcheck": "depcheck"
+    "test:e2e": "serve -l 3000 test/fixtures"
   },
   "devDependencies": {
     "auto-changelog": "^2.5.0",
@@ -74,8 +73,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "depcheck": "^1.4.7"
   }
 }
