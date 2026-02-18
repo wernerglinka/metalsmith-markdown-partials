@@ -6,13 +6,13 @@
   },
   "git": {
     "commitMessage": "Release ${version}",
-    "tagAnnotation": "Release ${version}",
-    "changelog": "npx auto-changelog -u --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)' --stdout"
+    "tagAnnotation": "Release ${version}"
   },
   "npm": { "publish": false },
   "github": {
     "release": true,
     "releaseName": "metalsmith-markdown-partials ${version}",
-    "tokenRef": "GH_TOKEN"
+    "tokenRef": "GH_TOKEN",
+    "autoGenerate": true
   }
 }
