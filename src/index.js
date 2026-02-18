@@ -25,7 +25,7 @@ const defaults = {
  * @returns {Options} Normalized options
  */
 function normalizeOptions(options) {
-  return Object.assign({}, defaults, options || {});
+  return { ...defaults, ...(options || {}) };
 }
 
 /**
