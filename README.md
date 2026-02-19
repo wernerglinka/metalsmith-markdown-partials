@@ -83,7 +83,7 @@ Partial markdown files have the extention `.md`. A markdown partial file does NO
 
 The markdown partials directory's default location is `./src/markdown-library/`. The partials directory can be set via the libraryPath option.
 
-## Example
+## Examples
 
 **index.md**
 

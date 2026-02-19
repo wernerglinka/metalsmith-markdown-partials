@@ -51,6 +51,7 @@
     "test": "c8 --include=src/**/*.js mocha 'test/index.js' 'test/cjs.test.cjs' -t 15000",
     "test:esm": "c8 --include=src/**/*.js mocha test/index.js -t 15000",
     "test:cjs": "c8 --include=src/**/*.js mocha test/cjs.test.cjs -t 15000",
+    "test:coverage": "c8 npm test",
     "test:e2e": "serve -l 3000 test/fixtures"
   },
   "devDependencies": {
