@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-markdown-partials",
-  "version": "2.6.1",
+  "version": "3.0.0",
   "description": "A Metalsmith plugin that allows the use of partial markdown files",
   "keywords": [
     "metalsmith-plugin",
