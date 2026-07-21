@@ -6,15 +6,14 @@ A Metalsmith plugin that enables the use of Markdown partials.
 [![npm: version][npm-badge]][npm-url]
 [![license: MIT][license-badge]][license-url]
 [![coverage][coverage-badge]][coverage-url]
-[![ESM/CommonJS][modules-badge]][npm-url]
+[![ESM][modules-badge]][npm-url]
 
 Markdown fragments are inserted into the contents of a page markdown file by replacing an include marker with markdown partials. This allows for modular markdown and promotes reuse of content.
 
 ## Features
 
-- This plugin supports both ESM and CommonJS environments with no configuration needed:
-  - ESM: `import mdPartials from 'metalsmith-markdown-partials'`
-  - CommonJS: `const mdPartials = require('metalsmith-markdown-partials')`
+- Inserts reusable markdown partials into page markdown by replacing include markers
+- **ESM-only**, requires Node >= 22. CommonJS consumers can `require()` it via Node 22's `require(esm)` support.
 
 ## Installation
 
@@ -22,15 +21,19 @@ Markdown fragments are inserted into the contents of a page markdown file by rep
 $ npm install --save metalsmith-markdown-partials
 ```
 
+This package is ESM-only and requires Node >= 22. CommonJS projects on Node 22 can still consume it with `require('metalsmith-markdown-partials')` thanks to Node's `require(esm)` support.
+
 ## Usage
 
 ```js
-.use(mdPartials({
-    libraryPath: './markdown-partials/',
-    fileSuffix: '.md.njk',
-  }))
-...
+import mdPartials from 'metalsmith-markdown-partials';
 
+metalsmith.use(
+  mdPartials({
+    libraryPath: './markdown-partials/',
+    fileSuffix: '.md.njk'
+  })
+);
 ```
 
 ## Options
@@ -40,12 +43,13 @@ $ npm install --save metalsmith-markdown-partials
 The default libraryPath is `./markdown-partials/`. This default assumes that all pages are located in `./src/` so the markdown partials are located inside the metalsmith source directory.
 
 ```js
-const mdPartials = require('metalsmith-markdown-partials');
+import mdPartials from 'metalsmith-markdown-partials';
 
-metalsmith(__dirname)
-  .use(mdPartials({
+metalsmith(import.meta.dirname).use(
+  mdPartials({
     libraryPath: './markdown-partials/'
   })
+);
 ```
 
 **fileSuffix**
@@ -53,7 +57,9 @@ metalsmith(__dirname)
 The default fileSuffix is `.md`, but depending on which templating language is used, the suffix will have two parts. For example for Nunjucks it will be `md.njk`.
 
 ```js
-const mdPartials = require('metalsmith-markdown-partials').use(
+import mdPartials from 'metalsmith-markdown-partials';
+
+metalsmith.use(
   mdPartials({
     fileSuffix: '.md.njk'
   })
@@ -160,7 +166,7 @@ To use this plugin with the Metalsmith CLI, add `metalsmith-markdown-partials` t
 
 ## Test Coverage
 
-This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
+This project maintains high statement and line coverage for the source code. Coverage is measured with Node's native test runner (`node --test --experimental-test-coverage`).
 
 ## Author
 
@@ -178,4 +184,4 @@ Code released under [the MIT license](https://github.com/wernerglinka/metalsmith
 [license-url]: LICENSE
 [coverage-badge]: https://img.shields.io/badge/test%20coverage-94%25-brightgreen
 [coverage-url]: #test-coverage
-[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
+[modules-badge]: https://img.shields.io/badge/module-ESM-blue

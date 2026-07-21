@@ -64,6 +64,11 @@ function getMarkdownIncludes(files, options, debug) {
      * the markdown partials library is also located in the content folder
      */
     if (file.endsWith(options.fileSuffix) && !file.startsWith(libraryName)) {
+      // Guard against files whose contents are missing or not a Buffer
+      if (!Buffer.isBuffer(files[file].contents)) {
+        return;
+      }
+
       const str = files[file].contents.toString();
 
       // Check if markers are present
@@ -161,8 +166,7 @@ function initMarkdownPartials(options) {
   options = normalizeOptions(options);
 
   return function markdownPartials(files, metalsmith, done) {
-    // Use metalsmith's debug method if available
-    const debug = metalsmith.debug ? metalsmith.debug(debugNs) : () => {};
+    const debug = metalsmith.debug(debugNs);
     debug('Running with options: %o', options);
 
     try {

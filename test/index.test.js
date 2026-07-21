@@ -1,9 +1,9 @@
-// ESM test file for Metalsmith plugins
 import { strict as assert } from 'node:assert';
-import { fileURLToPath } from 'node:url';
-import { dirname, resolve, join } from 'node:path';
 import { readFileSync } from 'node:fs';
-import metalsmith from 'metalsmith';
+import { dirname, join, resolve } from 'node:path';
+import { describe, it } from 'node:test';
+import { fileURLToPath } from 'node:url';
+import Metalsmith from 'metalsmith';
 
 // Import the plugin directly from src for accurate coverage
 import plugin from '../src/index.js';
@@ -16,18 +16,18 @@ function file(_path) {
   return readFileSync(fixture(_path), 'utf8');
 }
 
-describe('metalsmith-markdown-partials (ESM)', () => {
+describe('metalsmith-markdown-partials', () => {
   // Verify ESM module loading
   it('should be importable as an ES module', () => {
     assert.strictEqual(typeof plugin, 'function', 'Plugin should be a function when imported with ESM');
     assert.strictEqual(typeof plugin(), 'function', 'Plugin should return a function when called');
   });
 
-  it('should replace marker with markdown partial', (done) => {
-    metalsmith(fixture())
+  it('should replace marker with markdown partial', (_t, done) => {
+    Metalsmith(fixture())
       .use(
         plugin({
-          libraryPath: join(fixture(), `/src/md-partials/`),
+          libraryPath: join(fixture(), '/src/md-partials/'),
           fileSuffix: '.md'
         })
       )
@@ -44,19 +44,7 @@ describe('metalsmith-markdown-partials (ESM)', () => {
       });
   });
 
-  it('should use metalsmith debug when available', (done) => {
-    // Create a mock debug function that records calls
-    const debugCalls = [];
-    const mockMetalsmith = {
-      debug:
-        () =>
-        (...args) => {
-          debugCalls.push(args);
-          return true;
-        }
-    };
-
-    // Create test files
+  it('should replace markers in in-memory files using a real Metalsmith instance', (_t, done) => {
     const files = {
       'test.md': {
         contents: Buffer.from('Test content {#md "partial.md" #} more content')
@@ -66,50 +54,23 @@ describe('metalsmith-markdown-partials (ESM)', () => {
       }
     };
 
-    // Create and call the plugin
     const pluginInstance = plugin({
       libraryPath: './md-partials/',
       fileSuffix: '.md'
     });
 
-    pluginInstance(files, mockMetalsmith, () => {
-      assert(debugCalls.length > 0, 'Debug function should have been called');
-      assert(debugCalls[0][0].includes('options'), 'Should include options message');
+    pluginInstance(files, Metalsmith(fixture()), (err) => {
+      assert.strictEqual(err, undefined, 'No error should occur');
+      assert.strictEqual(
+        files['test.md'].contents.toString(),
+        'Test content Partial content more content',
+        'Marker should be replaced with the partial content'
+      );
       done();
     });
   });
 
-  it('should handle missing debug method gracefully', (done) => {
-    // Create a metalsmith mock without debug method
-    const mockMetalsmith = {};
-
-    // Create test files
-    const files = {
-      'test.md': {
-        contents: Buffer.from('Test content {#md "partial.md" #} more content')
-      },
-      'md-partials/partial.md': {
-        contents: Buffer.from('Partial content')
-      }
-    };
-
-    // Should not throw error when debug is missing
-    const pluginInstance = plugin({
-      libraryPath: './md-partials/',
-      fileSuffix: '.md'
-    });
-
-    pluginInstance(files, mockMetalsmith, (err) => {
-      assert.strictEqual(err, undefined, 'No error should occur when debug is missing');
-      done();
-    });
-  });
-
-  it('should handle files without markers correctly', (done) => {
-    // Create a metalsmith mock
-    const mockMetalsmith = {};
-
-    // Create test files
+  it('should handle files without markers correctly', (_t, done) => {
     const files = {
       'test.md': {
         contents: Buffer.from('Test content without any markers')
@@ -119,13 +80,12 @@ describe('metalsmith-markdown-partials (ESM)', () => {
       }
     };
 
-    // Should not throw error when no markers are found
     const pluginInstance = plugin({
       libraryPath: './md-partials/',
       fileSuffix: '.md'
     });
 
-    pluginInstance(files, mockMetalsmith, (err) => {
+    pluginInstance(files, Metalsmith(fixture()), (err) => {
       assert.strictEqual(err, undefined, 'No error should occur when no markers are present');
       // Content should remain unchanged
       assert.strictEqual(

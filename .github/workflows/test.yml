@@ -17,15 +17,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           cache: 'npm'
       - run: npm install
-      - name: Build the project
-        run: npm run build
       - name: Run tests with coverage
         run: npm run coverage
         continue-on-error: true
@@ -47,25 +45,25 @@ jobs:
       - name: Update README with coverage badge
         run: |
           # Determine the color based on coverage percentage
-          if [ ${{ steps.coverage.outputs.coverage }} -ge 90 ]; then
+          if [ $ -ge 90 ]; then
             COLOR="brightgreen"
-          elif [ ${{ steps.coverage.outputs.coverage }} -ge 80 ]; then
+          elif [ $ -ge 80 ]; then
             COLOR="green"
-          elif [ ${{ steps.coverage.outputs.coverage }} -ge 70 ]; then
+          elif [ $ -ge 70 ]; then
             COLOR="yellowgreen"
-          elif [ ${{ steps.coverage.outputs.coverage }} -ge 60 ]; then
+          elif [ $ -ge 60 ]; then
             COLOR="yellow"
-          elif [ ${{ steps.coverage.outputs.coverage }} -ge 50 ]; then
+          elif [ $ -ge 50 ]; then
             COLOR="orange"
           else
             COLOR="red"
           fi
 
           # Create the badge text
-          BADGE="[coverage-badge]: https://img.shields.io/badge/test%20coverage-${{ steps.coverage.outputs.coverage }}%25-$COLOR"
+          BADGE="[coverage-badge]: https://img.shields.io/badge/test%20coverage-$%25-$COLOR"
 
           # Debug output
-          echo "Coverage: ${{ steps.coverage.outputs.coverage }}%"
+          echo "Coverage: $%"
           echo "Color: $COLOR"
           echo "Badge: $BADGE"
 
@@ -90,4 +88,4 @@ jobs:
         env:
           # This token is automatically provided by GitHub Actions
           # It only has permissions within the workflow run
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: $
